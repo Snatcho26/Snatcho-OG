@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Resend } from "resend";
 
-// Initialize Resend with API key from your environment
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -16,9 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ message: "Missing email or name" });
     }
 
-    // Send welcome email
     await resend.emails.send({
-      from: "Snatcho <hello@snatchoindia.com>", // use your verified Resend domain
+      from: "Snatcho <hello@snatchoindia.com>",
       to: email,
       subject: "Welcome to Snatcho 🎉",
       html: `<p>Hey ${name},</p>
